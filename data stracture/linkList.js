@@ -15,59 +15,97 @@ class Linklist {
     unshift(data) {
         let newNode = new Node(data, this.head);
         this.head = newNode;
-        this.length = this.length + 1;
+        this.length++
     }
     shift() {
+        if (!this.length > 0) {
+            throw new Error("Link list is empty")
+        }
+        if (this.length === 1) {
+            return this.head = null
+        }
         this.head = this.head.next;
-        this.length = this.length - 1;
+        this.length--
     }
     push(data) {
-        let newNode = new Node(data);
-        let head = this.head;
-        while (head.next) {
-            head = head.next;
+        let current = this.head;
+        if (!this.length > 0) {
+            return this.unshift(data)
         }
-        head.next = newNode;
-        this.length = this.length + 1
+        while (current.next) {
+            current = current.next;
+        }
+        current.next = new Node(data);
+        this.length++
     }
     pop() {
+        if (!this.length > 0) {
+            throw new Error("Link list is empty")
+        }
+        if (this.length === 1) {
+            return this.head = null
+        }
         let head = this.head
         while (head.next.next) {
             head = head.next;
         }
         head.next = null;
-        this.length = this.length - 1
+        this.length--
     }
     insert_at(data, insertIndex) {
         if (insertIndex > this.length || insertIndex < 0) {
-            throw new console.error("invalid index");
+            throw new Error("invalid index");
         }
-
         if (insertIndex === 0) {
-            const newNode = new Node(data)
-            this.unshift(newNode)
+            this.unshift(data)
             return
         }
         if (insertIndex === this.length) {
-            const newNode = new Node(data)
-            this.push(newNode)
+            this.push(data)
             return
         }
-
-        let itr = this.head
+        let current = this.head
         let index = 0
-
+        let pre
         while (index < insertIndex) {
-            itr = itr.next
             index++
+            pre = current
+            current = current.next
         }
-        itr.next = new Node(data, itr.next);
-        this.length = this.length + 1
+        let next = current
+        current = new Node(data, next);
+        pre.next = current
+        this.length++
+    }
+    remove_at(insertIndex = 0) {
+        if (insertIndex >= this.length || insertIndex < 0) {
+            throw new Error("invalid index");
+        }
+        if (insertIndex === 0) {
+            this.shift()
+            return
+        }
+        if (insertIndex === this.length - 1) {
+            this.pop()
+            return
+        }
+        let current = this.head
+        let index = 0
+        let pre
+        while (index < insertIndex) {
+            index++
+            pre = current
+            current = current.next
+        }
+        pre.next = current.next
+        this.length--
     }
     print() {
         let head = this.head;
         let data = [];
-
+        if (this.length === 0) {
+            return "link list is empty"
+        }
         while (head) {
             data.push(head.data)
             head = head.next;
@@ -78,9 +116,15 @@ class Linklist {
         return this.length
     }
     getFirst() {
+        if (this.length === 0) {
+            throw new Error("link list is empty")
+        }
         return this.head.data
     }
     getLast() {
+        if (this.length === 0) {
+            throw new Error("link list is empty")
+        }
         let data = this.head;
         while (data.next) {
             data = data.next
@@ -92,17 +136,22 @@ class Linklist {
 
 let link_list = new Linklist();
 
-link_list.unshift({ name: "rohim", age: 32 })
-link_list.unshift({ name: "kiran", age: 22 })
-link_list.unshift(3)
-link_list.unshift(4)
+// link_list.unshift(1)
+// link_list.unshift(2)
+// link_list.unshift(3)
+// link_list.unshift(4)
 // link_list.push({ name: "rifat", age: 27 })
-link_list.push(6)
-// link_list.push(7)
+link_list.push(1)
+link_list.push(2)
+link_list.push(3)
+link_list.push(4)
+link_list.push(5)
+// link_list.push(4)
 // link_list.insert_at(5, 0)
 // link_list.pop()
 // link_list.pop()
 // link_list.shift()
+link_list.remove_at(3)
 console.log(link_list.print())
 // console.log(link_list.getLength())
 // console.log(link_list.getFirst())
