@@ -1,0 +1,13 @@
+const Linklist = require("./linkList")
+
+const linkList = new Linklist()
+linkList.push(1)
+linkList.push(2)
+linkList.push(3)
+// linkList.pop()
+console.log(linkList.getLength())
+linkList.insert_at(2, 9)
+linkList.remove_at(2)
+console.log(linkList.getFirst())
+console.log(linkList.getLast())
+console.log(linkList.print())

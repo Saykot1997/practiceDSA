@@ -40,19 +40,19 @@ class Linklist {
     }
     pop() {
         if (!this.length > 0) {
-            throw new Error("Link list is empty")
+            return null
         }
         if (this.length === 1) {
             return this.head = null
         }
-        let head = this.head
-        while (head.next.next) {
-            head = head.next;
+        let current = this.head
+        while (current.next.next) {
+            current = current.next;
         }
-        head.next = null;
+        current.next = null;
         this.length--
     }
-    insert_at(data, insertIndex) {
+    insert_at(insertIndex, data) {
         if (insertIndex > this.length || insertIndex < 0) {
             throw new Error("invalid index");
         }
@@ -101,14 +101,14 @@ class Linklist {
         this.length--
     }
     print() {
-        let head = this.head;
+        let current = this.head;
         let data = [];
         if (this.length === 0) {
             return "link list is empty"
         }
-        while (head) {
-            data.push(head.data)
-            head = head.next;
+        while (current) {
+            data.push(current.data)
+            current = current.next;
         }
         return data;
     }
@@ -133,30 +133,7 @@ class Linklist {
     }
 }
 
-
-let link_list = new Linklist();
-
-// link_list.unshift(1)
-// link_list.unshift(2)
-// link_list.unshift(3)
-// link_list.unshift(4)
-// link_list.push({ name: "rifat", age: 27 })
-link_list.push(1)
-link_list.push(2)
-link_list.push(3)
-link_list.push(4)
-link_list.push(5)
-// link_list.push(4)
-// link_list.insert_at(5, 0)
-// link_list.pop()
-// link_list.pop()
-// link_list.shift()
-link_list.remove_at(3)
-console.log(link_list.print())
-// console.log(link_list.getLength())
-// console.log(link_list.getFirst())
-// console.log(link_list.getLast())
-
+module.exports = Linklist;
 
 
 
