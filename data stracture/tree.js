@@ -15,9 +15,9 @@ class TreeNode {
             let str = ""
 
             for (let i = 0; i < level; i++) {
-                str += "__"
+                str += "  "
             }
-            console.log(str + this.data)
+            console.log(str + "|__" + this.data)
         } else {
             console.log(this.data)
         }
