@@ -23,6 +23,43 @@ class BST {
             }
         }
     }
+    // deleteNode(data, parentNode) {
+
+    // }
+    delete(data) {
+        if (data === this.value) {
+            console.log(`data is equal to the root node ${this.value} `)
+            if (!this.left && !this.right) {
+
+            }
+        } else if (data > this.value) {
+            console.log(`data: ${data} is greter then root: ${this.value} `)
+            this.right.delete(data, this.right)
+        } else {
+            console.log(`data: ${data} is smaller then root: ${this.value} `)
+            this.left.delete(data, this.left)
+        }
+    }
+    min() {
+        if (!this.left) {
+            return this.value
+        }
+        let itr = this.left
+        while (itr.left) {
+            itr = itr.left
+        }
+        return itr.value
+    }
+    max() {
+        if (!this.left) {
+            return this.value
+        }
+        let itr = this.left
+        while (itr.left) {
+            itr = itr.left
+        }
+        return itr.value
+    }
     tree() {
         return this
     }
@@ -41,8 +78,7 @@ class BST {
         }
         return elements
     }
-
-    search(value) {
+    contains(value) {
         // if value is at the base
         if (value === this.value) {
             return true
@@ -50,7 +86,7 @@ class BST {
         // if value is less then base or root tree
         if (value < this.value) {
             if (this.left) {
-                return this.left.search(value)
+                return this.left.contains(value)
             } else {
                 return false
             }
@@ -58,23 +94,13 @@ class BST {
         // if value is greater then base or root
         if (value > this.value) {
             if (this.right) {
-                return this.right.search(value)
+                return this.right.contains(value)
             } else {
                 return false
             }
         }
     }
 
-    max() {
-        if (!this.right) {
-            return this.value
-        }
-        let itr = this.right
-
-        // while(itr.){
-
-        // }
-    }
 }
 
 
@@ -90,7 +116,10 @@ bst.add(10)
 bst.add(17)
 bst.add(20)
 
-// console.log(bst.in_order_traversel())
-console.log(bst.search(20))
-console.log(bst.search(32))
+// console.log(bst.contains(20))
+// console.log(bst.contains(20))
+// console.log(bst.min())
+bst.delete(20)
+console.log(bst.tree())
+console.log(bst.in_order_traversel())
 
