@@ -36,6 +36,9 @@ class Queue {
         }
         return this.#stroage[this.#first]
     }
+    isEmpty() {
+        return this.#size === 0
+    }
 }
 
 module.exports = Queue
