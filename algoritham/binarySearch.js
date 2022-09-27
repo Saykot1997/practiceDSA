@@ -1,13 +1,10 @@
 // Problem : Given a sorted array of "n" elements and a terget element "t" find the index of "t" in the array. Return -1 if
 // the target element is not found.
 
-
-
 const binarySearch = (array, n) => {
     if (!array.length > 0) {
         return -1
     }
-
     let leftPointer = 0
     let rightPoinert = array.length - 1
 
